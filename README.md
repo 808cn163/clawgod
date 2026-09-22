@@ -1,6 +1,6 @@
-# ClawGod
+# ClawGod-v1.8.0
 
-[English](README.md) | [中文](README_ZH.md) | [日本語](README_JP.md)
+**项目来自 https://github.com/0Chencc/clawgod/releases#release-v1.8.0 ,版权归原作者**
 
 [![Latest](https://img.shields.io/github/v/release/0chencc/clawgod?style=flat&label=Latest)](https://github.com/0Chencc/clawgod/releases/latest)
 [![Released](https://img.shields.io/github/release-date/0chencc/clawgod?style=flat&label=Released)](https://github.com/0Chencc/clawgod/releases/latest)
