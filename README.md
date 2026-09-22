@@ -8,22 +8,22 @@
 [![Compat](https://img.shields.io/github/actions/workflow/status/0chencc/clawgod/compat-daily.yml?branch=main&style=flat&label=Compat)](https://github.com/0Chencc/clawgod/actions/workflows/compat-daily.yml)
 [![Claude tested](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/0Chencc/clawgod/badges/claude-version.json&style=flat)](https://github.com/0Chencc/clawgod/actions/workflows/compat-daily.yml)
 
-> God mode for [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+> [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 上帝模式。
 
-**This is NOT a third-party Claude Code client.** ClawGod is a runtime patch applied on top of the official Claude Code. It works with any version — as Claude Code updates, ClawGod automatically re-extracts and re-patches against the new version on the next launch.
+**这不是第三方 Claude Code 客户端。** ClawGod 是作用在官方 Claude Code 之上的运行时补丁。它兼容任何版本——当 Claude Code 升级，ClawGod 会在下次启动时自动从新版本重新抽取并重新打补丁。
 
-## Prerequisites
+## 前置依赖
 
-Install these **before** running the ClawGod installer:
+运行 ClawGod 安装脚本**之前**先装好：
 
-| Tool | Why | Install |
-|------|-----|---------|
-| **Claude Code** (native binary) | ClawGod patches the official Bun standalone binary you already have | [`claude.ai/install.sh`](https://claude.ai/install.sh) (macOS/Linux) or [`claude.ai/install.ps1`](https://claude.ai/install.ps1) (Windows) |
-| **ripgrep** | Required by Claude Code's Grep tool | `brew install ripgrep` / `apt install ripgrep` / `winget install BurntSushi.ripgrep.MSVC` |
-| **Node.js >= 18** | Used by the patcher | [nodejs.org](https://nodejs.org) |
-| **Bun** | Runtime for the patched cli.js; auto-installed if missing | [bun.sh](https://bun.sh), `npm install -g bun`, `scoop install bun`, or `choco install bun` |
+| 工具 | 用途 | 安装 |
+|------|------|------|
+| **Claude Code**（原生二进制） | ClawGod 是基于你已装的官方 Bun standalone 二进制做 patch | [`claude.ai/install.sh`](https://claude.ai/install.sh)（macOS/Linux）或 [`claude.ai/install.ps1`](https://claude.ai/install.ps1)（Windows） |
+| **ripgrep** | Claude Code 内置 Grep tool 必需 | `brew install ripgrep` / `apt install ripgrep` / `winget install BurntSushi.ripgrep.MSVC` |
+| **Node.js >= 18** | patcher 使用 | [nodejs.org](https://nodejs.org) |
+| **Bun** | 运行 patched cli.js 的 runtime，缺失时自动安装 | [bun.sh](https://bun.sh)、`npm install -g bun`、`scoop install bun` 或 `choco install bun` |
 
-## Install
+## 安装
 
 **macOS / Linux:**
 ```bash
@@ -35,74 +35,74 @@ curl -fsSL https://github.com/0Chencc/clawgod/releases/latest/download/install.s
 irm https://github.com/0Chencc/clawgod/releases/latest/download/install.ps1 | iex
 ```
 
-Green logo = patched. Orange logo = original.
+绿色 Logo = 已 Patch。橙色 Logo = 原版。
 
-![ClawGod Patched](bypass.png)
+![ClawGod 效果展示](bypass.png)
 
-## What it does
+## 功能一览
 
-### Feature Unlocks
+### 功能解锁
 
-| Patch | What you get |
-|-------|-------------|
-| **Internal User Mode** | 24+ hidden commands (`/share`, `/teleport`, `/issue`, `/bughunter`...), debug logging, API request dumps |
-| **GrowthBook Overrides** | Override any feature flag via config file |
-| **Agent Teams** | Multi-agent swarm collaboration, no flags needed |
-| **Computer Use** | Screen control without Max/Pro subscription (macOS) |
-| **Auto-mode** | Unlocks auto-mode for third-party API users (no firstParty gate) |
-| **Ultraplan** | Multi-agent planning via Claude Code Remote |
-| **Ultrareview** | Automated bug hunting via Claude Code Remote |
+| 补丁 | 效果 |
+|------|------|
+| **内部用户模式** | 24+ 隐藏命令（`/share`、`/teleport`、`/issue`、`/bughunter`...），调试日志，API 请求记录 |
+| **GrowthBook 覆盖** | 通过配置文件覆盖任意 Feature Flag |
+| **Agent Teams** | 多智能体协作，无需额外参数 |
+| **Computer Use** | 无需 Max/Pro 订阅即可使用屏幕控制（macOS） |
+| **Auto-mode** | 解锁第三方 API 用户的 auto-mode（移除 firstParty 限制） |
+| **Ultraplan** | 通过 Claude Code Remote 进行多智能体规划 |
+| **Ultrareview** | 通过 Claude Code Remote 自动化 Bug 查找 |
 
-### Restriction Removals
+### 限制移除
 
-| Patch | What's removed |
-|-------|---------------|
-| **CYBER_RISK_INSTRUCTION** | Security testing refusal (pentesting, C2, exploits) |
-| **URL Restriction** | "NEVER generate or guess URLs" instruction |
-| **Cautious Actions** | Forced confirmation before destructive operations |
-| **Login Notice** | "Not logged in" startup reminder |
+| 补丁 | 移除内容 |
+|------|---------|
+| **CYBER_RISK_INSTRUCTION** | 安全测试拒绝提示（渗透测试、C2 框架、漏洞利用） |
+| **URL 限制** | "禁止生成或猜测 URL" 指令 |
+| **操作审慎** | 破坏性操作前的强制确认 |
+| **登录提示** | 启动时的"未登录"提醒 |
 
-### Geo-Steganography Neutralization
+### 地区隐写中和
 
-| Patch | What's neutralized |
-|-------|-------------------|
-| **Date String (qla)** | System prompt encodes user location via Unicode apostrophe variants (U+0027 / U+2019 / U+02BC / U+02B9) and date separator (`-` vs `/` for CN timezone). Patched to always use ASCII `'` and unmodified date format |
-| **Geo-Detection Probe (rdp)** | Client-side three-axis detection: timezone (`Asia/Shanghai` / `Asia/Urumqi`), proxy hostname against XOR-obfuscated 100+ domain blocklist, CN-LLM vendor keywords in base URL. Patched to always return null |
-| **Apostrophe Selector (odp)** | Selects one of four Unicode apostrophes based on detection results. Patched to always return ASCII `'` (defense-in-depth) |
+| 补丁 | 中和内容 |
+|------|---------|
+| **日期字符串 (qla)** | 系统提示词通过 Unicode 撇号变体（U+0027 / U+2019 / U+02BC / U+02B9）和日期分隔符（中国时区 `-` → `/`）编码用户地理位置。Patch 后始终使用 ASCII `'` 和原始日期格式 |
+| **地区检测探针 (rdp)** | 客户端三维检测：时区（`Asia/Shanghai` / `Asia/Urumqi`）、代理域名与 XOR 混淆的 100+ 域名黑名单比对、base URL 中的国产大模型关键词。Patch 后始终返回 null |
+| **撇号选择器 (odp)** | 根据检测结果选择四种 Unicode 撇号之一。Patch 后始终返回 ASCII `'`（纵深防御） |
 
-### Visual
+### 视觉
 
-| Patch | Effect |
-|-------|--------|
-| **Green Theme** | Brand color → green. Patched at a glance |
-| **Message Filters** | Shows content hidden from non-Anthropic users |
+| 补丁 | 效果 |
+|------|------|
+| **绿色主题** | 品牌色 → 绿色，一眼辨别是否已 Patch |
+| **消息过滤** | 显示对非 Anthropic 用户隐藏的内容 |
 
-### Reliability
+### 可靠性
 
-| Feature | What it does |
-|---------|-------------|
-| **Glob/Grep Restore** | Bun compile inlines `EMBEDDED_SEARCH_TOOLS=true`, hiding built-in Glob/Grep tools. Patch un-inlines the env check and adds bfs/ugrep binary availability detection — tools are restored when running under Bun runtime |
-| **1h Prompt Cache** | Forces 1h TTL allowlist on (was effectively 5m → much higher cache_creation token usage) |
-| **Third-Party Cache Fix** | Auto-disables `x-anthropic-billing-header` when `baseURL` is non-Anthropic. The header's per-request `cch` field breaks prompt-cache hit rate on DeepSeek / OneAPI / Bedrock / vLLM and any other Anthropic-compatible proxy. You no longer need to set `CLAUDE_CODE_ATTRIBUTION_HEADER=0` yourself. |
-| **Auto Re-patch** | Detects when the user's native Claude binary has been upgraded; transparently re-extracts and re-patches on next launch |
-| **Update Notification** | Checks GitHub releases once per 24h (async, non-blocking). Shows a one-line notice if a newer ClawGod version is available |
-| **Lean Settings** | Three-level token optimization for `~/.claude/settings.json`. **on** (default): removes unused tool definitions + disables Workflows/RemoteControl/Artifact. **max**: additionally removes Plan mode, Agent Teams, bundled skills. **off**: all tools restored |
+| 功能 | 作用 |
+|------|------|
+| **Glob/Grep 恢复** | Bun 编译时将 `EMBEDDED_SEARCH_TOOLS=true` 内联为字面量，导致内置 Glob/Grep 工具被隐藏。Patch 还原 env 检查并加入 bfs/ugrep 可用性检测——在 Bun runtime 下运行时工具自动恢复 |
+| **1h Prompt Cache** | 强制启用 1h TTL allowlist（默认实际是 5m → 空闲后导致大量 cache_creation token 浪费） |
+| **第三方 Cache 修复** | 当 `baseURL` 指向非 Anthropic 域名时自动关闭 `x-anthropic-billing-header`。该 header 里的 `cch` 字段每请求都变，会让 DeepSeek / OneAPI / Bedrock / vLLM 以及所有 Anthropic 协议代理的 prompt-cache 命中率归零。不需要再自行配置 `CLAUDE_CODE_ATTRIBUTION_HEADER=0`。 |
+| **自动重打补丁** | 检测到用户官方升级了 native Claude binary 时，下次启动自动重新抽取 + 重新 patch |
+| **更新通知** | 每 24h 异步检查 GitHub releases（非阻塞），发现新版本时启动前显示一行提示 |
+| **精简设置** | 三级 token 优化，作用于 `~/.claude/settings.json`。**on**（默认）：移除未使用工具定义 + 禁用 Workflows/RemoteControl/Artifact。**max**：额外移除 Plan mode、Agent Teams、内置 skills。**off**：恢复全部工具 |
 
-> **Lean Settings** are non-destructive and persist across updates. Toggle anytime: `claude --lean-on` (default) / `claude --lean-max` (aggressive) / `claude --lean-off` (restore all). To opt out of a single setting, set it yourself (e.g. `"disableArtifact": false`).
+> **精简设置**不会破坏现有配置，更新时保持用户选择。随时切换：`claude --lean-on`（默认）/ `claude --lean-max`（激进）/ `claude --lean-off`（恢复全部）。取消单项设置只需自行修改（如 `"disableArtifact": false`）。
 
-## Commands
+## 使用
 
 ```bash
-claude              # Patched Claude Code (replaces the official launcher)
-clawgod             # Same as `claude`, explicit & guaranteed entry point
-claude.orig         # Original unpatched version (auto-backed-up)
+claude              # 已 Patch 的 Claude Code（替换官方 launcher）
+clawgod             # 同 `claude`，显式且永远生效的入口
+claude.orig         # 原版未修改版本（自动备份）
 ```
 
-`clawgod` is unambiguous: on Windows where `claude.exe` may shadow `claude.cmd`, `clawgod.cmd` always works. Even after official self-update overwrites `claude`, `clawgod` keeps running the patched build.
+`clawgod` 是一个无歧义的入口：Windows 上即便 `claude.exe` 抢占了 `claude.cmd`，`clawgod.cmd` 始终生效；即便官方自动更新覆盖了 `claude`，`clawgod` 仍跑 patched 版本。
 
-## Configuration
+## 配置
 
-`~/.clawgod/provider.json` is auto-created on first run. Setting `apiKey` lets you skip OAuth entirely and point ClawGod at any Anthropic-compatible endpoint.
+首次启动会自动生成 `~/.clawgod/provider.json`。填入 `apiKey` 即可**跳过 OAuth 登录**，对接任何 Anthropic 协议端点。
 
 ```json
 {
@@ -114,36 +114,36 @@ claude.orig         # Original unpatched version (auto-backed-up)
 }
 ```
 
-- **`apiKey` set** → ClawGod injects it as `ANTHROPIC_API_KEY` and isolates from `~/.claude/settings.json`. Works with Anthropic, DeepSeek, and OpenAI-compatible gateways. A non-Anthropic `baseURL` also populates `ANTHROPIC_AUTH_TOKEN` for gateway auth.
-- **`apiKey` empty** → OAuth path. Run `claude auth login` once; `~/.claude` keeps hosting your subagents, skills, and MCP settings.
+- **填写 `apiKey`**：ClawGod 注入 `ANTHROPIC_API_KEY` 并与 `~/.claude/settings.json` 隔离。可用于 Anthropic 官方、DeepSeek，以及任何 OpenAI-compatible 网关；`baseURL` 指向非 Anthropic 域名时，还会自动注入 `ANTHROPIC_AUTH_TOKEN` 以适配网关鉴权。
+- **留空 `apiKey`**：走 OAuth 路径，执行一次 `claude auth login`，`~/.claude` 下的 subagents / skills / MCP 配置继续有效。
 
-## How it works
+## 工作原理
 
-Since `@anthropic-ai/claude-code` v2.1.113, the npm package no longer ships `cli.js` — it's a thin loader that dispatches to platform-specific Bun standalone binaries. ClawGod adapts:
+从 `@anthropic-ai/claude-code` v2.1.113 起，npm 包不再带 `cli.js`——它只是个 thin loader 转发到平台特定的 Bun standalone 二进制。ClawGod 这样适配：
 
-1. Locates the user's installed native Bun binary in `~/.local/share/claude/versions/`
-2. Extracts the embedded `cli.js` source from the `__BUN` segment (Mach-O / ELF / PE)
-3. Extracts the embedded `.node` native modules (audio-capture, image-processor, computer-use-*, url-handler) into `~/.clawgod/vendor/`
-4. Rewrites `/$bunfs/...` virtual paths to point at the extracted modules
-5. Applies 29 regex-based patches (version-agnostic — same patches work across many releases)
-6. The `claude` / `clawgod` launchers run the patched cli.js under the Bun runtime
+1. 在 `~/.local/share/claude/versions/` 定位用户已装的 Bun native binary
+2. 从 `__BUN` segment（Mach-O / ELF / PE）抽出嵌入的 `cli.js` 源码
+3. 抽出嵌入的 `.node` 原生模块（audio-capture、image-processor、computer-use-*、url-handler）放到 `~/.clawgod/vendor/`
+4. 把 `/$bunfs/...` 虚拟路径重写到本地 vendor 路径
+5. 应用 29 条正则 patch（跨版本兼容，同一组 regex 覆盖多个 release）
+6. `claude` / `clawgod` launcher 在 Bun runtime 下跑 patched cli.js
 
-A `.source-version` stamp in `~/.clawgod/` records which native version was patched. On every launch the wrapper compares it against the latest binary in `versions/`; if the user upgraded Claude Code via the official installer, ClawGod auto-re-patches on the next run.
+`~/.clawgod/.source-version` 标记当时被 patch 的版本号。每次启动 wrapper 比对它和 `versions/` 里最新二进制；如果用户走官方途径升级了 Claude Code，下次启动会自动重打补丁。
 
-## Update
+## 更新
 
-**Just run `claude update` as usual.** ClawGod patches the command to route through its own installer, which pulls the current Anthropic release from npm (`@anthropic-ai/claude-code-<plat>@latest`), re-extracts cli.js, re-applies patches, and rewrites the launcher. So the upstream update command keeps working the way you expect — you get the latest Claude, with patches still applied, in one step.
+**直接照常跑 `claude update` 即可。** ClawGod 把这条命令 patch 成走自己的 installer——从 npm 拉 Anthropic 当前发布（`@anthropic-ai/claude-code-<plat>@latest`）、重新提取 cli.js、重新打补丁、重写 launcher。所以上游 `claude update` 命令对用户依然如常工作——一条命令拿到最新 Claude + 补丁仍然生效。
 
-Extra options:
+额外选项：
 
 ```bash
-claude update --version 2.1.180   # Pin to a specific Claude Code version
-claude update --no-upgrade        # Re-patch without downloading (use existing cli.js)
+claude update --version 2.1.180   # 锁定到指定 Claude Code 版本
+claude update --no-upgrade        # 不下载新版，只用最新 patcher 重新打补丁
 ```
 
-`--version` is useful when a new release has issues and you want to stay on a known-good version. `--no-upgrade` re-applies the latest patches from the installer to the existing cli.js — handy when only the patcher has been updated.
+`--version` 适用于新版有问题、想停留在已知稳定版本时。`--no-upgrade` 对现有 cli.js 重新应用最新 patch——当只有 patcher 更新了（修了正则）而不需要拉新 Claude 版本时特别好用。
 
-If you'd rather invoke the installer directly (same effect, both paths fetch the same upstream release and re-patch):
+如果你想直接调 installer（效果一样，两条路径都会拉同一个上游 release 并重新 patch）:
 
 **macOS / Linux:**
 ```bash
@@ -155,18 +155,18 @@ curl -fsSL https://github.com/0Chencc/clawgod/releases/latest/download/install.s
 irm https://github.com/0Chencc/clawgod/releases/latest/download/install.ps1 | iex
 ```
 
-If you'd rather drop ClawGod and use Anthropic's original `claude update` (which manages its own paths and would overwrite our launcher), uninstall first:
+如果你想脱离 ClawGod、使用 Anthropic 原本的 `claude update`（它会写到自己管的目录、并把我们的 launcher 替换掉），请先卸载：
 
 ```bash
 bash ~/.clawgod/install.sh --uninstall
 ```
 
-## Uninstall
+## 卸载
 
 **macOS / Linux:**
 ```bash
 curl -fsSL https://github.com/0Chencc/clawgod/releases/latest/download/install.sh | bash -s -- --uninstall
-hash -r  # refresh shell cache
+hash -r  # 刷新 shell 缓存
 ```
 
 **Windows:**
@@ -174,13 +174,13 @@ hash -r  # refresh shell cache
 irm https://github.com/0Chencc/clawgod/releases/latest/download/install.ps1 -OutFile install.ps1; .\install.ps1 -Uninstall
 ```
 
-Uninstall restores `claude.orig → claude` and removes the `clawgod` alias.
+卸载会把 `claude.orig` 还原成 `claude`，并移除 `clawgod` 别名。
 
-> After install or uninstall, restart your terminal or run `hash -r` if the command doesn't take effect immediately.
+> 安装或卸载后，如果命令未立即生效，请重启终端或执行 `hash -r`。
 
-## License
+## 许可证
 
-GPL-3.0 — Not affiliated with Anthropic. Use at your own risk.
+GPL-3.0 — 与 Anthropic 无关，风险自负。
 
 ## Star History
 
