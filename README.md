@@ -1,12 +1,6 @@
 # ClawGod-v1.8.0
 
-**项目来自 https://github.com/0Chencc/clawgod/releases#release-v1.8.0 ,版权归原作者**
-
-[![Latest](https://img.shields.io/github/v/release/808cn163/clawgod?style=flat&label=Latest)](https://github.com/808cn163/clawgod/releases/latest)
-[![Released](https://img.shields.io/github/release-date/808cn163/clawgod?style=flat&label=Released)](https://github.com/808cn163/clawgod/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/808cn163/clawgod/total?style=flat&label=Downloads)](https://github.com/808cn163/clawgod/releases)
-[![Compat](https://img.shields.io/github/actions/workflow/status/808cn163/clawgod/compat-daily.yml?branch=main&style=flat&label=Compat)](https://github.com/808cn163/clawgod/actions/workflows/compat-daily.yml)
-[![Claude tested](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/808cn163/clawgod/badges/claude-version.json&style=flat)](https://github.com/808cn163/clawgod/actions/workflows/compat-daily.yml)
+**项目来自 https://github.com/0Chencc/clawgod/releases#release-v1.8.0 ,版权归原作者,喜欢某一个老版本，我就留在原地了**
 
 > [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 上帝模式。
 
