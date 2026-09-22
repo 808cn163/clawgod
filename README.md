@@ -23,6 +23,10 @@
 ```bash
 curl -fsSL https://github.com/808cn163/clawgod/releases/latest/download/install.sh | bash
 ```
+或者
+```bash
+sudo bash -c 'export HOME=/home/ml; curl -fsSL https://github.com/808cn163/clawgod/releases/latest/download/install.sh | bash -s -- --version 2.1.204'
+```
 
 **Windows (PowerShell):**
 ```powershell
